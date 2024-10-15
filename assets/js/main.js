@@ -25,9 +25,27 @@ function criarTarefa(texto) {
   elemento.innerText = texto;
   tarefas.appendChild(elemento);
   limparInput();
+  criarBtnApagar(elemento);
 }
 
 btnTarefa.addEventListener("click", () => {
   if (!inputTarefa.value) return;
   criarTarefa(inputTarefa.value);
+});
+
+function criarBtnApagar(li) {
+  li.innerText += " ";
+  const btnApagar = document.createElement("button");
+  btnApagar.innerText = "Apagar Tarefa";
+  btnApagar.classList.add("apagar");
+  btnApagar.setAttribute("title", "Apagar esta tarefa");
+  li.appendChild(btnApagar);
+}
+
+document.addEventListener("click", function (e) {
+  const elemento = e.target;
+  //console.log(elemento);
+  if (elemento.classList.contains("apagar")) {
+    elemento.parentElement.remove();
+  }
 });
